@@ -17,6 +17,22 @@ spec:
       containers:
         - name: ubuntu-container
           image: ubuntu:latest
-          command: ["bash", "-c", "sleep infinity"]
-          ports:
-            - containerPort: 80
+      command: ["/bin/bash", "-c"]
+      args:
+        - |
+          apt-get update \
+          && apt-get install -y apache2 \
+          && cat > /var/www/html/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html>
+          <head><title>My Custom Page</title></head>
+          <body>
+            <h1>Hi my name is!</h1>
+            <p>My name is!</p>
+            <p>chika chik</p>
+          </body>
+          </html>
+          EOF
+          && apache2ctl -D FOREGROUND
+      ports:
+        - containerPort: 80
