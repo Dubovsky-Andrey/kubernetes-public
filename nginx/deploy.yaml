@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dev-app
+  name: stage-ubuntu
   labels:
     app: ubuntu
 spec:
