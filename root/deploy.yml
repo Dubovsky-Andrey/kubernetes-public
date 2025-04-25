@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apache-config
+  namespace: argocd-demo
+data:
+  init-apache.sh: |
+    #!/bin/bash
+    set -e
+    apt-get update
+    DEBIAN_FRONTEND=noninteractive apt-get install -y apache2
+    # Apache in foreground
+    exec apache2ctl -D FOREGROUND
 ---
 apiVersion: apps/v1
 kind: Deployment
