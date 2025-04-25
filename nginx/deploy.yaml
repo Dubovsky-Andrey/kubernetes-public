@@ -1,19 +1,19 @@
-apiVersion: apps/v1
+golangapiVersion: apps/v1
 kind: Deployment
 metadata:
   name: dev-app
   labels:
-    app: nginx
+    app: ubuntu
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: ubuntu
   template:
     metadata:
       labels:
-        app: nginx
+        app: c
     spec:
       containers:
-      - name: nginx-container
-        image: nginx:latest
+        - name: ubuntu-container
+          image: ubuntu:latest
