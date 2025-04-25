@@ -3,17 +3,17 @@ kind: Deployment
 metadata:
   name: dev-app
   labels:
-    app: ubuntu
+    app: nginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ubuntu
+      app: nginx
   template:
     metadata:
       labels:
-        app: ubuntu
+        app: nginx
     spec:
       containers:
-        - name: ubuntu-container
-          image: ubuntu:latest
+        - name: nginx-container
+          image: nginx:latest
