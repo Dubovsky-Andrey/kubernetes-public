@@ -1,0 +1,98 @@
+# Add Secret for bot before apply this file
+# variables:
+# TELEGRAM_BOT_TOKEN_1=BOT_TOKEN_1
+# TELEGRAM_BOT_TOKEN_2=BOT_TOKEN_2
+# TELEGRAM_BOT_TOKEN_3=BOT_TOKEN_3
+# NFS_SERVER_IP
+# NFS_SERVER_PATH
+
+# PV
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: golang-telegram-pv
+  labels:
+    type: nfs
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-storage
+  nfs:
+    server: NFS_SERVER_IP
+    path: NFS_SERVER_PATH
+---
+# PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: golang-telegram-pvc
+  namespace: stage
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: nfs-storage
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golang-telegram-deployment
+  namespace: stage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: golang-telegram
+  template:
+    metadata:
+      labels:
+        app: golang-telegram
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: golang-telegram
+          image: golang:1.23
+          workingDir: /config
+          command: ["sh", "-c"]
+          args:
+            - |
+              go mod init telegram-bot || true && \
+              go get github.com/go-telegram-bot-api/telegram-bot-api/v5 && \
+              go run main.go
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          env:
+            - name: TELEGRAM_BOT_TOKEN_1
+              valueFrom:
+                secretKeyRef:
+                  name: golang-telegram-secret
+                  key: TELEGRAM_BOT_TOKEN_1
+            - name: TELEGRAM_BOT_TOKEN_2
+              valueFrom:
+                secretKeyRef:
+                  name: golang-telegram-secret
+                  key: TELEGRAM_BOT_TOKEN_2
+            - name: TELEGRAM_BOT_TOKEN_3
+              valueFrom:
+                secretKeyRef:
+                  name: golang-telegram-secret
+                  key: TELEGRAM_BOT_TOKEN_3
+          volumeMounts:
+            - name: config-volume
+              mountPath: /config
+      volumes:
+        - name: config-volume
+          persistentVolumeClaim:
+            claimName: golang-telegram-pvc
