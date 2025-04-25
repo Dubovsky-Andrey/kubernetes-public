@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-argocd
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Dubovsky-Andrey/kubernetes-public
+    targetRevision: HEAD
+    path: nginx
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd-demo
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true
