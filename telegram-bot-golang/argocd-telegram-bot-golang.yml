@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: telegram-bot-golang
+  namespace: stage
+spec:
+  project: telegram-bot-golang
+
+  source:
+    repoURL: https://github.com/anveshmuppeda/argo-cd-demo
+    targetRevision: HEAD
+    path: telegram-bot-golang
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: stage
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true
