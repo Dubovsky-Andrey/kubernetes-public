@@ -8,6 +8,9 @@ configMapGenerator:
   - name: ubuntu-config
     envs:
       - config.env
+  - name: ubuntu-script
+    files:
+      - start.sh
 
 patches:
   - path: service-patch.yml
@@ -23,6 +26,13 @@ patches:
       version: v1
       kind: PersistentVolume
       name: ubuntu-pv
+
+  - path: ubuntu-script-config.yml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: ubuntu
 
 generatorOptions:
   disableNameSuffixHash: true

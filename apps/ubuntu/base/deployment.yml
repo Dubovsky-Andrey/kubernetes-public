@@ -17,16 +17,17 @@ spec:
       containers:
         - name: ubuntu
           image: ubuntu:latest
-          command: ["/bin/bash", "-c"]
-          args:
-            - |
-              tail -f /dev/null
+          command:
+            - /bin/bash
+            - /opt/scripts/start.sh
           ports:
             - containerPort: 80
           envFrom:
             - configMapRef:
                 name: ubuntu-config
           volumeMounts:
+            - name: ubuntu-script
+              mountPath: /opt/scripts
             - name: ubuntu-data
               mountPath: /app/data
 

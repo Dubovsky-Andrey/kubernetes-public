@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ubuntu-script
+data:
+  start.sh: |
+    #!/bin/bash
+    echo "Hello from overlay start.sh"
+    # ... ваши команды ...
+    tail -f /dev/null
