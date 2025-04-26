@@ -6,9 +6,9 @@ data:
   init-apache.sh: |
     #!/bin/bash
     dnf update -y
-    dnf install -y httpd
-    systemctl enable httpd
-    systemctl start httpd
+    #dnf install -y httpd
+    #systemctl enable httpd
+    #systemctl start httpd
 ---
 apiVersion: apps/v1
 kind: Deployment
