@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fedora-argocd
+  name: fedora-latest
   namespace: argocd
 spec:
   project: default
