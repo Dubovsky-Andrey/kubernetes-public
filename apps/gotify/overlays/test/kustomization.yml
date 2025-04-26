@@ -10,17 +10,26 @@ secretGenerator:
   - name: gotify-secret
     envs:
       - secret.env
-    behavior: merge
 
 configMapGenerator:
   - name: gotify-config
     envs:
       - config.env
-    behavior: merge
 
-patchesStrategicMerge:
-  - service-patch.yml
-  - pv-patch.yml
+patches:
+  - path: service-patch.yml
+    target:
+      group: ""
+      version: v1
+      kind: Service
+      name: gotify
+
+  - path: pv-patch.yml
+    target:
+      group: ""
+      version: v1
+      kind: PersistentVolume
+      name: gotify-pv
 
 generatorOptions:
   disableNameSuffixHash: true
