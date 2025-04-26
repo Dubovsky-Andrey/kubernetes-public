@@ -1,44 +1,43 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: apache-config-ubuntu
-  namespace: argocd-demo
+  name: apache-config-fedora
+  namespace: test
 data:
   init-apache.sh: |
     #!/bin/bash
-    set -e
-    apt-get update
-    DEBIAN_FRONTEND=noninteractive apt-get install -y apache2
-    # Apache in foreground
-    exec apache2ctl -D FOREGROUND
+    dnf update -y
+    dnf install -y httpd
+    systemctl enable httpd
+    systemctl start httpd
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stage-ubuntu
+  name: stage-fedora
   labels:
-    app: ubuntu
+    app: fedora
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ubuntu
+      app: fedora
   template:
     metadata:
       labels:
-        app: ubuntu
+        app: fedora
     spec:
       containers:
-        - name: ubuntu-container
-          image: ubuntu:latest
+        - name: fedora-container
+          image: fedora:latest
           # Start script from ConfigMap
-          command: ["/bin/bash", "/opt/init-apache.sh"]
+          command:
+            - /bin/bash
+            - -c
+          args:
+            - /opt/init-apache.sh && tail -f /dev/null
           ports:
             - containerPort: 80
-          volumeMounts:
-            - name: apache-script
-              mountPath: /opt/init-apache.sh
-              subPath: init-apache.sh
           resources:
             requests:
               memory: "128Mi"
@@ -46,8 +45,12 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "500m"
+          volumeMounts:
+            - name: apache-script
+              mountPath: /opt/init-apache.sh
+              subPath: init-apache.sh
       volumes:
         - name: apache-script
           configMap:
-            name: apache-config-ubuntu
+            name: apache-config-fedora
             defaultMode: 0755

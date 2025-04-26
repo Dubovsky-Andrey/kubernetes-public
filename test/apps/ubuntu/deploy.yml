@@ -1,43 +1,44 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: apache-config-fedora
-  namespace: stage
+  name: apache-config-ubuntu
+  namespace: test
 data:
   init-apache.sh: |
     #!/bin/bash
-    dnf update -y
-    dnf install -y httpd
-    systemctl enable httpd
-    systemctl start httpd
+    set -e
+    apt-get update
+    DEBIAN_FRONTEND=noninteractive apt-get install -y apache2
+    # Apache in foreground
+    exec apache2ctl -D FOREGROUND
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stage-fedora
+  name: stage-ubuntu
   labels:
-    app: fedora
+    app: ubuntu
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fedora
+      app: ubuntu
   template:
     metadata:
       labels:
-        app: fedora
+        app: ubuntu
     spec:
       containers:
-        - name: fedora-container
-          image: fedora:latest
+        - name: ubuntu-container
+          image: ubuntu:latest
           # Start script from ConfigMap
-          command:
-            - /bin/bash
-            - -c
-          args:
-            - /opt/init-apache.sh && tail -f /dev/null
+          command: ["/bin/bash", "/opt/init-apache.sh"]
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: apache-script
+              mountPath: /opt/init-apache.sh
+              subPath: init-apache.sh
           resources:
             requests:
               memory: "128Mi"
@@ -45,12 +46,8 @@ spec:
             limits:
               memory: "256Mi"
               cpu: "500m"
-          volumeMounts:
-            - name: apache-script
-              mountPath: /opt/init-apache.sh
-              subPath: init-apache.sh
       volumes:
         - name: apache-script
           configMap:
-            name: apache-config-fedora
+            name: apache-config-ubuntu
             defaultMode: 0755
