@@ -17,7 +17,10 @@ spec:
       containers:
         - name: ubuntu
           image: ubuntu:latest
-          command: ["/bin/bash", "tail -f /dev/null"]
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              tail -f /dev/null
           ports:
             - containerPort: 80
           envFrom:
