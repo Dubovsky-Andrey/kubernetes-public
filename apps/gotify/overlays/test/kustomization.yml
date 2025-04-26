@@ -9,7 +9,7 @@ resources:
 secretGenerator:
   - name: gotify-secret
     envs:
-      - secret.env
+      - gotify-secret.env
 
 configMapGenerator:
   - name: gotify-config
@@ -24,12 +24,32 @@ patches:
       kind: Service
       name: gotify
 
-  - path: pv-patch.yml
-    target:
-      group: ""
-      version: v1
-      kind: PersistentVolume
-      name: gotify-pv
-
 generatorOptions:
   disableNameSuffixHash: true
+
+replacements:
+  - source:
+      kind: Secret
+      name: gotify-secret
+      fieldPath: data.NFS_SERVER_PATH
+    targets:
+      - select:
+          group: ""
+          version: v1
+          kind: PersistentVolume
+          name: gotify-pv
+        fieldPaths:
+          - spec.nfs.path
+
+  - source:
+      kind: Secret
+      name: gotify-secret
+      fieldPath: data.NFS_SERVER_IP
+    targets:
+      - select:
+          group: ""
+          version: v1
+          kind: PersistentVolume
+          name: gotify-pv
+        fieldPaths:
+          - spec.nfs.server
