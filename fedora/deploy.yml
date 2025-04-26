@@ -52,5 +52,5 @@ spec:
       volumes:
         - name: apache-script
           configMap:
-            name: apache-config
+            name: apache-config-fedora
             defaultMode: 0755
