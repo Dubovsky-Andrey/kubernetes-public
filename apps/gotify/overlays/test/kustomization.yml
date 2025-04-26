@@ -1,20 +1,24 @@
-# Base directory
-bases:
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: test
+
+resources:
   - ../../base
 
-# Env for Secret/ConfigMap
 secretGenerator:
   - name: gotify-secret
     envs:
       - secret.env
+    behavior: merge
 
 configMapGenerator:
   - name: gotify-config
     envs:
       - config.env
+    behavior: merge
 
-# Strategic Merge Patсhes for PV and Service
-patchesStrategicMerge:
+patches:
   - service-patch.yaml
   - pv-patch.yaml
 
