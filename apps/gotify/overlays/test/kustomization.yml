@@ -19,8 +19,19 @@ configMapGenerator:
     behavior: merge
 
 patches:
-  - service-patch.yaml
-  - pv-patch.yaml
+  - target:
+      group: ""
+      version: v1
+      kind: Service
+      name: gotify
+    path: service-patch.yml
+
+  - target:
+      group: ""
+      version: v1
+      kind: PersistentVolume
+      name: gotify-pv
+    path: pv-patch.yml
 
 generatorOptions:
   disableNameSuffixHash: true
