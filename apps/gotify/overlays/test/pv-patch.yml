@@ -4,5 +4,5 @@ metadata:
   name: gotify-pv
 spec:
   nfs:
-    path: "/mnt/volume1/nfs/k8s-data/gotify"
+    path: /volume1/nfs/k8s-data/gotify
     server: 192.168.1.20
