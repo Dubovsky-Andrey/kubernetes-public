@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: gotify-nfs-config
-data:
-  NFS_SERVER_PATH: "/volume1/nfs/k8s-data/gotify-test"
-  NFS_SERVER_IP: "192.168.1.20"
