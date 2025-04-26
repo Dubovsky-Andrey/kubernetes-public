@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Dubovsky-Andrey/kubernetes-public
-    path: argocd-applications
+    path: argocd-apps
     targetRevision: HEAD
   destination:
     name: in-cluster
