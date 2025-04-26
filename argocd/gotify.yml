@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-test
+  name: gotify-test
   namespace: argocd
-  finalizers:
-    - argocd.argoproj.io/resources-finalizer
 spec:
   project: default
   source:
     repoURL: https://github.com/Dubovsky-Andrey/kubernetes-public
-    path: test/argocd-apps
+    path: apps/gotify/overlays/test
     targetRevision: HEAD
   destination:
-    name: in-cluster
+    server: https://kubernetes.default.svc
     namespace: test
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

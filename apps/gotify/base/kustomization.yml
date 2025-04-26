@@ -1,0 +1,21 @@
+resources:
+  - deployment.yml
+  - service.yml
+  - pvc.yml
+  - pv.yml
+
+configMapGenerator:
+  - name: gotify-config
+    # пустой placeholder, перезапишем в оверлеях
+    literals:
+      - TZ=PLACEHOLDER
+
+secretGenerator:
+  - name: gotify-secret
+    # пустые ключи, перезапишем в оверлеях
+    literals:
+      - username=PLACEHOLDER
+      - password=PLACEHOLDER
+
+generatorOptions:
+  disableNameSuffixHash: true

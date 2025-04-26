@@ -1,0 +1,22 @@
+# Base directory
+bases:
+  - ../../base
+
+# Env for Secret/ConfigMap
+secretGenerator:
+  - name: gotify-secret
+    envs:
+      - secret.env
+
+configMapGenerator:
+  - name: gotify-config
+    envs:
+      - config.env
+
+# Strategic Merge Patсhes for PV and Service
+patchesStrategicMerge:
+  - service-patch.yaml
+  - pv-patch.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
