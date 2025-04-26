@@ -9,6 +9,11 @@ secretGenerator:
     envs:
       - gotify-secret.env
 
+configMapGenerator:
+  - name: gotify-config
+    envs:
+      - config.env
+
 patches:
   - path: service-patch.yml
     target:
