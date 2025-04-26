@@ -1,0 +1,38 @@
+# Deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      containers:
+        - name: ubuntu
+          image: ubuntu:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: ubuntu-config
+          volumeMounts:
+            - name: ubuntu-data
+              mountPath: /app/data
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+      volumes:
+        - name: ubuntu-data
+          persistentVolumeClaim:
+            claimName: ubuntu-pvc

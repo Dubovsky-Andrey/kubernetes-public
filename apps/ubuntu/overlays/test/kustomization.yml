@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: test
+
+resources:
+  - ../../base
+configMapGenerator:
+  - name: ubuntu-config
+    envs:
+      - config.env
+
+patches:
+  - path: service-patch.yml
+    target:
+      group: ""
+      version: v1
+      kind: Service
+      name: ubuntu
+
+  - path: pv-patch.yml
+    target:
+      group: ""
+      version: v1
+      kind: PersistentVolume
+      name: ubuntu-pv
+
+generatorOptions:
+  disableNameSuffixHash: true

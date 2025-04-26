@@ -1,0 +1,12 @@
+# Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ubuntu
+spec:
+  selector:
+    app: ubuntu
+  ports:
+    - port: 80
+      targetPort: 80
