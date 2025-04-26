@@ -4,12 +4,12 @@ namespace: test
 
 resources:
   - ../../base
-  - gotify-nfs-config.yaml # <- добавили как обычный ресурс
+  - gotify-nfs-config.yml
 
 secretGenerator:
   - name: gotify-secret
     envs:
-      - gotify-secret.env # ваш файл с GOTIFY_DEFAULTUSER_*
+      - gotify-secret.env
 
 patches:
   - path: service-patch.yml
