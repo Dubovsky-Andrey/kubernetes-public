@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apache-config
+  namespace: argocd-demo
+data:
+  init-apache.sh: |
+    #!/bin/bash
+    dnf update -y
+    dnf install -y httpd
+    systemctl enable httpd
+    systemctl start httpd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stage-fedora
+  labels:
+    app: fedora
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fedora
+  template:
+    metadata:
+      labels:
+        app: fedora
+    spec:
+      containers:
+        - name: fedora-container
+          image: fedora:latest
+          # Start script from ConfigMap
+          command: ["/bin/bash", "/opt/init-apache.sh"]
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          volumeMounts:
+            - name: apache-script
+              mountPath: /opt/init-apache.sh
+              subPath: init-apache.sh
+      volumes:
+        - name: apache-script
+          configMap:
+            name: apache-config
+            defaultMode: 0755
