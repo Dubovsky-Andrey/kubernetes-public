@@ -31,7 +31,11 @@ spec:
         - name: fedora-container
           image: fedora:latest
           # Start script from ConfigMap
-          command: ["/bin/bash", "/opt/init-apache.sh"]
+          command:
+            - /bin/bash
+            - -c
+          args:
+            - /opt/init-apache.sh && tail -f /dev/null
           ports:
             - containerPort: 80
           resources:
