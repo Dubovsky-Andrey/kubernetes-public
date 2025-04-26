@@ -1,20 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 namespace: test
 
 resources:
   - ../../base
+  - gotify-nfs-config.yml
 
 secretGenerator:
   - name: gotify-secret
     envs:
       - gotify-secret.env
-
-configMapGenerator:
-  - name: gotify-config
-    envs:
-      - config.env
 
 patches:
   - path: service-patch.yml
@@ -29,8 +24,8 @@ generatorOptions:
 
 replacements:
   - source:
-      kind: Secret
-      name: gotify-secret
+      kind: ConfigMap
+      name: gotify-nfs-config
       fieldPath: data.NFS_SERVER_PATH
     targets:
       - select:
@@ -40,12 +35,10 @@ replacements:
           name: gotify-pv
         fieldPaths:
           - spec.nfs.path
-        options:
-          decode: true
 
   - source:
-      kind: Secret
-      name: gotify-secret
+      kind: ConfigMap
+      name: gotify-nfs-config
       fieldPath: data.NFS_SERVER_IP
     targets:
       - select:
@@ -55,5 +48,3 @@ replacements:
           name: gotify-pv
         fieldPaths:
           - spec.nfs.server
-        options:
-          decode: true
