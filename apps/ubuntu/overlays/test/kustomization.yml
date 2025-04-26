@@ -10,7 +10,7 @@ configMapGenerator:
       - config.env
   - name: ubuntu-script
     files:
-      - start.sh
+      - scripts/start.sh
 
 patches:
   - path: service-patch.yml
