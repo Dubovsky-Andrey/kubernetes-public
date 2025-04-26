@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root
+  name: root-test
   namespace: argocd
   finalizers:
     - argocd.argoproj.io/resources-finalizer
@@ -13,7 +13,7 @@ spec:
     targetRevision: HEAD
   destination:
     name: in-cluster
-    namespace: argocd-demo
+    namespace: test
   syncPolicy:
     automated:
       prune: true
