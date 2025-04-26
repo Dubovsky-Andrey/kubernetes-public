@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: apache-config
+  name: apache-config-ubuntu
   namespace: argocd-demo
 data:
   init-apache.sh: |
@@ -39,6 +39,13 @@ spec:
             - name: apache-script
               mountPath: /opt/init-apache.sh
               subPath: init-apache.sh
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
       volumes:
         - name: apache-script
           configMap:

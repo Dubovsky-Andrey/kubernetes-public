@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: apache-config
+  name: apache-config-fedora
   namespace: stage
 data:
   init-apache.sh: |
