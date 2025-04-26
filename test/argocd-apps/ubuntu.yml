@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/Dubovsky-Andrey/kubernetes-public
     targetRevision: HEAD
-    path: apps/ubuntu
+    path: test/apps/ubuntu
 
   destination:
     server: https://kubernetes.default.svc
