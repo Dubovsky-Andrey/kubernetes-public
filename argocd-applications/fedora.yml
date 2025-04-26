@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/Dubovsky-Andrey/kubernetes-public
     targetRevision: HEAD
-    path: ubuntu
+    path: fedora
 
   destination:
     server: https://kubernetes.default.svc
