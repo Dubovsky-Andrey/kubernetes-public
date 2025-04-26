@@ -40,6 +40,8 @@ replacements:
           name: gotify-pv
         fieldPaths:
           - spec.nfs.path
+        options:
+          decode: true
 
   - source:
       kind: Secret
@@ -53,3 +55,5 @@ replacements:
           name: gotify-pv
         fieldPaths:
           - spec.nfs.server
+        options:
+          decode: true
