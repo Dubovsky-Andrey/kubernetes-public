@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: fedora-latest
+  name: gotify-latest
   namespace: argocd
 spec:
   project: default
@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/Dubovsky-Andrey/kubernetes-public
     targetRevision: HEAD
-    path: test/apps/fedora
+    path: test/apps/gotify
 
   destination:
     server: https://kubernetes.default.svc
