@@ -13,7 +13,7 @@ spec:
     targetRevision: HEAD
   destination:
     name: in-cluster
-    namespace: stage
+    namespace: argocd-demo
   syncPolicy:
     automated:
       prune: true
