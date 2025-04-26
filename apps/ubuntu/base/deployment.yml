@@ -17,6 +17,7 @@ spec:
       containers:
         - name: ubuntu
           image: ubuntu:latest
+          command: ["/bin/bash", "tail -f /dev/null"]
           ports:
             - containerPort: 80
           envFrom:
@@ -25,6 +26,7 @@ spec:
           volumeMounts:
             - name: ubuntu-data
               mountPath: /app/data
+
           resources:
             requests:
               memory: "128Mi"
