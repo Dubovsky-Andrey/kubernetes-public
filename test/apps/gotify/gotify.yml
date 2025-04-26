@@ -108,4 +108,8 @@ spec:
   selector:
     app: gotify
   type: LoadBalancer
+<<<<<<< HEAD
   loadBalancerIP: LOAD_BALANCER_IP
+=======
+  loadBalancerIP: 192.168.1.57
+>>>>>>> 14ef756cfbd3fe49f694867e040a86a4879efb78
