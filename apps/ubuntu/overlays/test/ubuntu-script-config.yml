@@ -1,3 +1,4 @@
+# ubuntu-script-config.yml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -6,5 +7,4 @@ data:
   start.sh: |
     #!/bin/bash
     echo "Hello from overlay start.sh"
-    # ... ваши команды ...
     tail -f /dev/null

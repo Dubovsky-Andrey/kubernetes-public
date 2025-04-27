@@ -1,17 +1,16 @@
+# kustomization.yml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: test
 
 resources:
   - ../../base
+  - ubuntu-script-config.yml
+
 configMapGenerator:
   - name: ubuntu-config
     envs:
       - config.env
-  - name: ubuntu-script
-    files:
-      - scripts/start.sh
-
 patches:
   - path: service-patch.yml
     target:
@@ -27,7 +26,7 @@ patches:
       kind: PersistentVolume
       name: ubuntu-pv
 
-  - path: ubuntu-script-config.yml
+  - path: deployment-script-patch.yml
     target:
       group: apps
       version: v1
