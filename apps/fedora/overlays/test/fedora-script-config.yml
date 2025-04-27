@@ -7,25 +7,32 @@ data:
   start.sh: |
     #!/bin/bash
     echo "Hello from overlay start.sh"
-    echo "Hello from overlay2 start.sh"
+    ARGOCD_VERSION=v2.14.11
+
     dnf update -y
     dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-    dnf install -y dnf-plugins-core wget unzip openssh openssh-server ansible helm terraform # openvpn
-    wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.6.0/kustomize_v5.6.0_linux_arm64.tar.gz
-    tar zxvf kustomize_v5.6.0_linux_arm64.tar.gz
-    rm -rf kustomize_v5.6.0_linux_arm64.tar.gz 
-    mv kustomize /usr/local/bin/
+    dnf install -y dnf-plugins-core uptime wget unzip openssh openssh-server ansible helm terraform # openvpn
+
+    curl -LO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.6.0/kustomize_v5.6.0_linux_arm64.tar.gz
     curl -LO https://dl.k8s.io/release/v1.32.0/bin/linux/arm64/kubectl
+    curl -O 'https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip'
+    curl -Lo argocd-linux-arm64 https://github.com/argoproj/argo-cd/releases/download/$ARGOCD_VERSION/argocd-linux-arm64
+
+    tar zxvf kustomize_v5.6.0_linux_arm64.tar.gz
+
+    mv kustomize /usr/local/bin/
+
     mv kubectl /usr/local/bin/
     chmod +x /usr/local/bin/kubectl
-    curl -O 'https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip'
+
     unzip awscli-exe-linux-aarch64.zip
     ./aws/install
-    rm -rf aws awscli-exe-linux-aarch64.zip
-    ARGOCD_VERSION=v2.14.11
-    curl -Lo argocd-linux-arm64 https://github.com/argoproj/argo-cd/releases/download/$ARGOCD_VERSION/argocd-linux-arm64
+
     chmod +x argocd-linux-arm64
     mv argocd-linux-arm64 /usr/local/bin/argocd
+
+    rm -rf aws awscli-exe-linux-aarch64.zip
+    rm -rf kustomize_v5.6.0_linux_arm64.tar.gz 
     rm -rf argocd-linux-arm64
 
     echo kustomize version
