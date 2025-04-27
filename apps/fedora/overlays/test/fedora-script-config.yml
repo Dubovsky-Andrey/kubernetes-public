@@ -6,11 +6,13 @@ metadata:
 data:
   start.sh: |
     #!/bin/bash
-    echo "Hello from overlay start.sh"
+    echo "Variables"
+
     ARGOCD_VERSION=v2.14.11
     KUSTOMIZE_VERSION=$KUSTOMIZE_VERSION
     KUBECTL_VERSION=v1.32.0
     TERRAFORM_VERSION=11.1.1
+    GO_VERSION=1.24.2
 
     dnf update -y
     dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
@@ -40,6 +42,12 @@ data:
     curl -Lo argocd-linux-arm64 https://github.com/argoproj/argo-cd/releases/download/$ARGOCD_VERSION/argocd-linux-arm64
     chmod +x argocd-linux-arm64
     mv argocd-linux-arm64 /usr/local/bin/argocd
+
+    # Install go
+    echo "Install go"
+    curl -LO https://go.dev/dl/go$GO_VERSION.linux-arm64.tar.gz
+    tar -C /usr/local -xzf go$GO_VERSION.linux-arm64.tar.gz
+    export PATH=$PATH:/usr/local/go/bin
 
     # Cleanup
     rm -rf aws awscli-exe-linux-aarch64.zip
@@ -72,6 +80,10 @@ data:
 
     echo ansible version
     ansible --version
+    echo " "
+
+    echo go version
+    go version
     echo " "
 
     tail -f /dev/null
