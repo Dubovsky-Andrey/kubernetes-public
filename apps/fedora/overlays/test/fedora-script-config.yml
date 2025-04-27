@@ -8,6 +8,8 @@ data:
     #!/bin/bash
     echo "Hello from overlay start.sh"
     ARGOCD_VERSION=v2.14.11
+    KUSTOMIZE_VERSION=$KUSTOMIZE_VERSION
+    KUBECTL_VERSION=v1.32.0
 
     dnf update -y
     dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
@@ -15,14 +17,14 @@ data:
 
     # Install kustomize
     echo "Install kustomize"
-    curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.6.0/kustomize_v5.5.0_linux_arm64.tar.gz
-    tar zxvf kustomize_v5.5.0_linux_arm64.tar.gz
+    curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F$KUSTOMIZE_VERSION/kustomize_$KUSTOMIZE_VERSION_linux_arm64.tar.gz
+    tar zxvf kustomize_$KUSTOMIZE_VERSION_linux_arm64.tar.gz
     mv kustomize /usr/local/bin/
     chmod +x /usr/local/bin/kustomize
 
     # Install kubectl
     echo "Install kubectl"
-    curl -LO https://dl.k8s.io/release/v1.32.0/bin/linux/arm64/kubectl
+    curl -LO https://dl.k8s.io/release/$KUBECTL_VERSION/bin/linux/arm64/kubectl
     mv kubectl /usr/local/bin/
     chmod +x /usr/local/bin/kubectl
 
@@ -40,7 +42,7 @@ data:
 
     # Cleanup
     rm -rf aws awscli-exe-linux-aarch64.zip
-    rm -rf kustomize_v5.5.0_linux_arm64.tar.gz 
+    rm -rf kustomize_$KUSTOMIZE_VERSION_linux_arm64.tar.gz 
     rm -rf argocd-linux-arm64
 
     echo kustomize version
