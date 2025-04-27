@@ -9,9 +9,8 @@ data:
     echo "Hello from overlay start.sh"
     echo "Hello from overlay2 start.sh"
     dnf update -y
-    dnf install -y dnf-plugins-core wget unzip openssh openssh-server openvpn ansible helm
     dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-    dnf -y install terraform
+    dnf install -y dnf-plugins-core wget unzip openssh openssh-server ansible helm terraform # openvpn
     wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.6.0/kustomize_v5.6.0_linux_arm64.tar.gz
     tar zxvf kustomize_v5.6.0_linux_arm64.tar.gz
     rm -rf kustomize_v5.6.0_linux_arm64.tar.gz 
