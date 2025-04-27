@@ -12,7 +12,7 @@ data:
     dnf install -y dnf-plugins-core wget
     dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
     dnf -y install terraform
-    wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.6.0/kustomize_v5.6.0_linux_amd64.tar.gz
-    tar zxvf kustomize_v5.6.0_linux_amd64.tar.gz 
+    wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.6.0/kustomize_v5.6.0_linux_arm64.tar.gz
+    tar zxvf kustomize_v5.6.0_linux_arm64.tar.gz 
     mv kustomize /usr/local/bin/
     tail -f /dev/null
