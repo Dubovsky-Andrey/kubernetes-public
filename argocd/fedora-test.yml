@@ -1,3 +1,4 @@
+apiVersion: argoproj.io/v1alpha1
 metadata:
   name: fedora-test
   namespace: argocd
