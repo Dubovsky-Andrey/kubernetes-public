@@ -3,5 +3,8 @@ kind: Service
 metadata:
   name: fedora
 spec:
+  ports:
+    - port: 80
+      targetPort: 80
   type: LoadBalancer
   loadBalancerIP: 192.168.1.62
