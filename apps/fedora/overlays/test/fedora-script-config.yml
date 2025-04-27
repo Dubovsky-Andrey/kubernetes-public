@@ -10,10 +10,11 @@ data:
     ARGOCD_VERSION=v2.14.11
     KUSTOMIZE_VERSION=$KUSTOMIZE_VERSION
     KUBECTL_VERSION=v1.32.0
+    TERRAFORM_VERSION=11.1.1
 
     dnf update -y
     dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-    dnf install -y dnf-plugins-core uptime wget unzip openssh openssh-server ansible helm terraform # openvpn
+    dnf install -y dnf-plugins-core uptime wget unzip openssh openssh-server ansible helm terraform-$TERRAFORM_VERSION # openvpn
 
     # Install kustomize
     echo "Install kustomize"
