@@ -8,6 +8,9 @@ data:
     #!/bin/bash
     echo "Variables"
 
+    ARCH=arm64
+    PLATFORM=$(uname -s)_$ARCH
+    PLATFORM_DASH=$(uname -s)-$ARCH
     ARGOCD_VERSION=v2.14.11
     KUSTOMIZE_VERSION=v5.5.0
     KUBECTL_VERSION=v1.32.0
@@ -31,6 +34,14 @@ data:
     mv kubectl /usr/local/bin/
     chmod +x /usr/local/bin/kubectl
 
+    # Install eksctl
+
+    curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+    # (Optional) Verify checksum
+    curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+    tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+    sudo mv /tmp/eksctl /usr/local/bin
+
     # Install awscli
     echo "Install awscli"
     curl -O 'https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip'
@@ -39,20 +50,20 @@ data:
 
     # Install argocd
     Echo "Install argocd"
-    curl -Lo argocd-linux-arm64 https://github.com/argoproj/argo-cd/releases/download/$ARGOCD_VERSION/argocd-linux-arm64
-    chmod +x argocd-linux-arm64
-    mv argocd-linux-arm64 /usr/local/bin/argocd
+    curl -Lo argocd-$PLATFORM_DASH https://github.com/argoproj/argo-cd/releases/download/$ARGOCD_VERSION/argocd-$PLATFORM_DASH
+    chmod +x argocd-$PLATFORM_DASH
+    mv argocd-$PLATFORM_DASH /usr/local/bin/argocd
 
     # Install go
     echo "Install go"
-    curl -LO https://go.dev/dl/go$GO_VERSION.linux-arm64.tar.gz
-    tar -C /usr/local -xzf go$GO_VERSION.linux-arm64.tar.gz
+    curl -LO https://go.dev/dl/go$GO_VERSION.$PLATFORM_DASH.tar.gz
+    tar -C /usr/local -xzf go$GO_VERSION.$PLATFORM_DASH.tar.gz
     export PATH=$PATH:/usr/local/go/bin
 
     # Cleanup
     rm -rf aws awscli-exe-linux-aarch64.zip
     rm -rf kustomize_$KUSTOMIZE_VERSION_linux_arm64.tar.gz 
-    rm -rf argocd-linux-arm64
+    rm -rf argocd-$PLATFORM_DASH
 
     echo kustomize version
     kustomize version
@@ -89,4 +100,10 @@ data:
     echo git version
     git version
     echo " "
+
+    echo eksctl version
+    eksctl version
+    echo " "
+
+    echo "Done"
     tail -f /dev/null
