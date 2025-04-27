@@ -45,17 +45,30 @@ data:
 
     echo kustomize version
     kustomize version
+    echo " "
+
     echo terraform version
-    echo kubectl version
     terraform version
+    echo " " 
+
     echo kubectl version
     kubectl version
+    echo " "
+
     echo aws version
     aws --version
+    echo " "
+
     echo argocd version
     argocd version
+    echo " "
+
     echo helm version
     helm version
+    echo " "
+
     echo ansible version
     ansible --version
+    echo " "
+
     tail -f /dev/null
