@@ -8,4 +8,6 @@ data:
     #!/bin/bash
     echo "Hello from overlay start.sh"
     echo "Hello from overlay2 start.sh"
+    apt update -y
+    apt install -y apache2
     tail -f /dev/null
