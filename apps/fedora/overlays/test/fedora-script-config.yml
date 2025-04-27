@@ -9,15 +9,18 @@ data:
     echo "Hello from overlay start.sh"
     echo "Hello from overlay2 start.sh"
     dnf update -y
-    dnf install -y dnf-plugins-core wget
+    dnf install -y dnf-plugins-core wget unzip
     dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
     dnf -y install terraform
     wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.6.0/kustomize_v5.6.0_linux_arm64.tar.gz
     tar zxvf kustomize_v5.6.0_linux_arm64.tar.gz 
     mv kustomize /usr/local/bin/
-    curl -LO https://dl.k8s.io/release/v1.32.0/bin/linux/amd64/kubectl
+    curl -LO https://dl.k8s.io/release/v1.32.0/bin/linux/arm64/kubectl
     mv kubectl /usr/local/bin/
     chmod +x /usr/local/bin/kubectl
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    ./aws/install
     kustomize version
     terraform version
     kubectl version
