@@ -20,7 +20,7 @@ data:
 
     # Install kustomize
     echo "Install kustomize"
-    curl -L https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F$KUSTOMIZE_VERSION/kustomize_$KUSTOMIZE_VERSION_linux_arm64.tar.gz
+    curl -L -O https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/$KUSTOMIZE_VERSION/kustomize_$KUSTOMIZE_VERSION_linux_arm64.tar.gz
     tar zxvf kustomize_$KUSTOMIZE_VERSION_linux_arm64.tar.gz
     mv kustomize /usr/local/bin/
     chmod +x /usr/local/bin/kustomize
