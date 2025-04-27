@@ -16,7 +16,7 @@ data:
 
     dnf update -y
     dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-    dnf install -y dnf-plugins-core uptime wget unzip openssh openssh-server ansible helm #terraform-$TERRAFORM_VERSION # openvpn
+    dnf install -y dnf-plugins-core uptime wget unzip openssh openssh-server ansible helm git #terraform-$TERRAFORM_VERSION # openvpn
 
     # Install kustomize
     echo "Install kustomize"
@@ -86,4 +86,7 @@ data:
     go version
     echo " "
 
+    echo git version
+    git version
+    echo " "
     tail -f /dev/null
