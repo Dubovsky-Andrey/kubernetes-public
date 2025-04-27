@@ -15,4 +15,10 @@ data:
     wget https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.6.0/kustomize_v5.6.0_linux_arm64.tar.gz
     tar zxvf kustomize_v5.6.0_linux_arm64.tar.gz 
     mv kustomize /usr/local/bin/
+    curl -LO https://dl.k8s.io/release/v1.32.0/bin/linux/amd64/kubectl
+    mv kubectl /usr/local/bin/
+    chmod +x /usr/local/bin/kubectl
+    kustomize version
+    terraform version
+    kubectl version
     tail -f /dev/null
