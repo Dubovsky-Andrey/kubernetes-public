@@ -1,0 +1,13 @@
+# fedora-script-config.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fedora-script
+data:
+  start.sh: |
+    #!/bin/bash
+    echo "Hello from overlay start.sh"
+    echo "Hello from overlay2 start.sh"
+    dnf update -y
+    dnf install -y httpd
+    tail -f /dev/null

@@ -1,0 +1,12 @@
+# Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fedora
+spec:
+  selector:
+    app: fedora
+  ports:
+    - port: 80
+      targetPort: 80

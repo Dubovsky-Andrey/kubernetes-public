@@ -1,0 +1,25 @@
+# Deployment script patch
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fedora
+  namespace: test
+spec:
+  template:
+    spec:
+      volumes:
+        - name: fedora-script
+          configMap:
+            name: fedora-script
+            items:
+              - key: start.sh
+                path: start.sh
+
+      containers:
+        - name: fedora
+          command:
+            - /bin/bash
+            - /opt/scripts/start.sh
+          volumeMounts:
+            - name: fedora-script
+              mountPath: /opt/scripts

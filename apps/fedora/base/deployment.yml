@@ -1,0 +1,50 @@
+# Deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fedora
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fedora
+  template:
+    metadata:
+      labels:
+        app: fedora
+    spec:
+      volumes:
+        - name: fedora-script
+          configMap:
+            name: fedora-script
+            items:
+              - key: start.sh
+                path: start.sh
+        - name: fedora-data
+          persistentVolumeClaim:
+            claimName: fedora-pvc
+      containers:
+        - name: fedora
+          image: fedora:latest
+          command:
+            - /bin/bash
+            - /opt/scripts/start.sh
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: fedora-config
+          volumeMounts:
+            - name: fedora-script
+              mountPath: /opt/scripts
+            - name: fedora-data
+              mountPath: /app/data
+
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
