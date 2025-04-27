@@ -19,7 +19,6 @@ data:
     curl -Lo argocd-linux-arm64 https://github.com/argoproj/argo-cd/releases/download/$ARGOCD_VERSION/argocd-linux-arm64
 
     tar zxvf kustomize_v5.6.0_linux_arm64.tar.gz
-
     mv kustomize /usr/local/bin/
 
     mv kubectl /usr/local/bin/
