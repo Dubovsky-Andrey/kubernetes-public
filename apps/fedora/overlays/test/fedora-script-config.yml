@@ -9,5 +9,7 @@ data:
     echo "Hello from overlay start.sh"
     echo "Hello from overlay2 start.sh"
     dnf update -y
-    dnf install -y httpd
+    dnf install -y dnf-plugins-core
+    dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+    dnf -y install terraform
     tail -f /dev/null
