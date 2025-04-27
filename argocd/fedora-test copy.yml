@@ -1,0 +1,18 @@
+metadata:
+  name: fedora2-test
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Dubovsky-Andrey/kubernetes-public
+    path: apps/fedora2/overlays/test
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
