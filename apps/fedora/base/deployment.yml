@@ -31,7 +31,7 @@ spec:
             - /bin/bash
             - /opt/scripts/start.sh
           ports:
-            - containerPort: 9099
+            - containerPort: 9090
           envFrom:
             - configMapRef:
                 name: fedora-config
