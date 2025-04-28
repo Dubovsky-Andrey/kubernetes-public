@@ -14,7 +14,7 @@ spec:
         app: homarr
     spec:
       securityContext:
-        fsGroup: 1000 # UID node
+        fsGroup: 1000
       containers:
         - name: homarr
           image: ghcr.io/ajnart/homarr:latest
