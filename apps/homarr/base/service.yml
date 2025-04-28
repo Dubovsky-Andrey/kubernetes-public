@@ -12,5 +12,3 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 7575
-  type: LoadBalancer
-  loadBalancerIP: 192.168.1.53

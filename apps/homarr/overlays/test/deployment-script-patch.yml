@@ -1,0 +1,25 @@
+# Deployment script patch
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homarr
+  namespace: test
+spec:
+  template:
+    spec:
+      volumes:
+        - name: homarr-script
+          configMap:
+            name: homarr-script
+            items:
+              - key: start.sh
+                path: start.sh
+
+      containers:
+        - name: homarr
+          command:
+            - /bin/bash
+            - /opt/scripts/start.sh
+          volumeMounts:
+            - name: homarr-script
+              mountPath: /opt/scripts
