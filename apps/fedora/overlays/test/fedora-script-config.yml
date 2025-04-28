@@ -65,7 +65,7 @@ data:
     rm -rf argocd-linux-arm64
     rm -rf go$GO_VERSION.linux-arm64.tar.gz
 
-    dnf install -ycockpit-ws cockpit-system
+    dnf install -y cockpit-ws cockpit-system
     echo 'root:12345678' | chpasswd
 
     echo kustomize version
