@@ -1,0 +1,13 @@
+# PersistentVolumeClaim (PVC)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: homarr-pvc
+  namespace: stage
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: nfs-storage

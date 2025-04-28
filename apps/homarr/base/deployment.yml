@@ -1,0 +1,39 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homarr-deployment
+  namespace: stage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homarr
+  template:
+    metadata:
+      labels:
+        app: homarr
+    spec:
+      securityContext:
+        fsGroup: 1000 # UID node
+      containers:
+        - name: homarr
+          image: ghcr.io/ajnart/homarr:latest
+          ports:
+            - containerPort: 7575
+          volumeMounts:
+            - name: homarr-storage
+              mountPath: /app/data/configs
+            - name: homarr-storage
+              mountPath: /app/public/icons
+              subPath: icons
+            - name: homarr-storage
+              mountPath: /data
+              subPath: data
+            - name: homarr-storage
+              mountPath: /app/public/imgs/backgrounds
+              subPath: imgs/backgrounds
+      volumes:
+        - name: homarr-storage
+          persistentVolumeClaim:
+            claimName: homarr-pvc
