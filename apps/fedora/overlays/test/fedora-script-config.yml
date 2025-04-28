@@ -18,7 +18,7 @@ data:
 
     dnf update -y
     dnf config-manager addrepo --from-repofile=https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-    dnf install -y dnf-plugins-core uptime wget unzip openssh openssh-server ansible helm git #terraform-$TERRAFORM_VERSION # openvpn
+    dnf install -y dnf-plugins-core uptime wget unzip openssh openssh-server ansible helm git cockpit-ws cockpit-system #terraform-$TERRAFORM_VERSION # openvpn
 
     # Install kustomize
     echo "Install kustomize"
@@ -64,6 +64,7 @@ data:
     rm -rf kustomize_$KUSTOMIZE_VERSION_linux_arm64.tar.gz 
     rm -rf argocd-linux-arm64
     rm -rf go$GO_VERSION.linux-arm64.tar.gz
+    echo 'root:12345678' | chpasswd
 
     echo kustomize version
     kustomize version
