@@ -7,7 +7,3 @@ metadata:
 spec:
   selector:
     app: homarr
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 7575
