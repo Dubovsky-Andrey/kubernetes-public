@@ -8,3 +8,10 @@ spec:
     spec:
       containers:
         - name: postgresql2222
+          env:
+            - name: POSTGRES_DB
+              value: test
+            - name: POSTGRES_USER
+              value: test
+            - name: POSTGRES_PASSWORD
+              value: test
