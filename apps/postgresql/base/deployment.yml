@@ -44,7 +44,7 @@ spec:
             - containerPort: 9090
           envFrom:
             - configMapRef:
-                name: fedora-config
+                name: postgresql-config
           volumeMounts:
             - name: postgresql-data
               mountPath: /app/data
