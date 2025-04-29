@@ -39,7 +39,6 @@ spec:
               value: test
           command:
             - /bin/bash
-            - /opt/scripts/start.sh
           ports:
             - containerPort: 9090
           envFrom:
