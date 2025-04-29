@@ -22,19 +22,21 @@ spec:
           persistentVolumeClaim:
             claimName: postgresql-pvc
       containers:
-        ports:
-          - containerPort: 9090
-        envFrom:
-          - configMapRef:
-              name: postgresql-config
-        volumeMounts:
-          - name: postgresql-storage
-            mountPath: /var/lib/postgresql/data
+        - name: postgres
+          image: postgres:17.4
+          ports:
+            - containerPort: 9090
+          envFrom:
+            - configMapRef:
+                name: postgresql-config
+          volumeMounts:
+            - name: postgresql-storage
+              mountPath: /var/lib/postgresql/data
 
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "1000m"
-          limits:
-            memory: "1024Mi"
-            cpu: "2000m"
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "1000m"
+            limits:
+              memory: "1024Mi"
+              cpu: "2000m"

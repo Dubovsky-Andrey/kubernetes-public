@@ -7,12 +7,10 @@ spec:
   template:
     spec:
       containers:
-        - name: postgresql
-          image: postgres:17.4
-          env:
-            - name: POSTGRES_DB
-              value: test
-            - name: POSTGRES_USER
-              value: test
-            - name: POSTGRES_PASSWORD
-              value: test
+        env:
+          - name: POSTGRES_DB
+            value: test
+          - name: POSTGRES_USER
+            value: test
+          - name: POSTGRES_PASSWORD
+            value: test
