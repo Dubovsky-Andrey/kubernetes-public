@@ -8,6 +8,7 @@ spec:
     spec:
       containers:
         - name: postgresql
+          image: postgres:17.4
           env:
             - name: POSTGRES_DB
               value: test
