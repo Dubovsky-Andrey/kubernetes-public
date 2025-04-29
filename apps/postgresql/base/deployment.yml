@@ -37,8 +37,6 @@ spec:
               value: test
             - name: POSTGRES_PASSWORD
               value: test
-          command:
-            - /bin/bash
           ports:
             - containerPort: 9090
           envFrom:
