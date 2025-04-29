@@ -6,19 +6,5 @@ metadata:
 spec:
   template:
     spec:
-      volumes:
-        - name: postgresql-script
-          configMap:
-            name: postgresql-script
-            items:
-              - key: start.sh
-                path: start.sh
-
       containers:
         - name: postgresql
-          command:
-            - /bin/bash
-            - /opt/scripts/start.sh
-          volumeMounts:
-            - name: postgresql-script
-              mountPath: /opt/scripts
