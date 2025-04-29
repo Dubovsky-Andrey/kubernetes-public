@@ -15,12 +15,6 @@ spec:
         app: postgresql
     spec:
       volumes:
-        - name: postgresql-script
-          configMap:
-            name: postgresql-script
-            items:
-              - key: start.sh
-                path: start.sh
         - name: postgresql-storage
           persistentVolumeClaim:
             claimName: postgresql-pvc
