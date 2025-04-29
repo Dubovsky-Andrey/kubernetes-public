@@ -13,6 +13,3 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs-storage
-  nfs:
-    path: PLACEHOLDER
-    server: PLACEHOLDER
