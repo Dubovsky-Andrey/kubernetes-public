@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgresql-pv
+spec:
+  nfs:
+    path: "/volume1/nfs/k8s-data/postgresql"
+    server: "192.168.1.20"
