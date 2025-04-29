@@ -46,9 +46,7 @@ spec:
             - configMapRef:
                 name: fedora-config
           volumeMounts:
-            - name: fedora-script
-              mountPath: /opt/scripts
-            - name: fedora-data
+            - name: postgresql-data
               mountPath: /app/data
             - name: postgresql-storage
               mountPath: /var/lib/postgresql/data
