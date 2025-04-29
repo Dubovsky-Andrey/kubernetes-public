@@ -7,7 +7,7 @@ spec:
   template:
     spec:
       containers:
-        - name: postgresql2222
+        - name: postgresql
           env:
             - name: POSTGRES_DB
               value: test
