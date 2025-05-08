@@ -1,0 +1,33 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: grafana
+          image: prom/grafana:latest
+          ports:
+            - containerPort: 9090
+          args:
+            - "--web.enable-remote-write-receiver"
+            - "--enable-feature=native-histograms"
+            - "--config.file=/etc/grafana/grafana.yml"
+          volumeMounts:
+            - name: grafana-storage
+              mountPath: /etc/grafana
+      volumes:
+        - name: grafana-storage
+          persistentVolumeClaim:
+            claimName: grafana-pvc
