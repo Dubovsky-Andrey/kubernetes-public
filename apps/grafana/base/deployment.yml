@@ -17,16 +17,12 @@ spec:
         fsGroup: 1000
       containers:
         - name: grafana
-          image: prom/grafana:latest
+          image: grafana/grafana:latest
           ports:
-            - containerPort: 9090
-          args:
-            - "--web.enable-remote-write-receiver"
-            - "--enable-feature=native-histograms"
-            - "--config.file=/etc/grafana/grafana.yml"
+            - containerPort: 80
           volumeMounts:
             - name: grafana-storage
-              mountPath: /etc/grafana
+              mountPath: /var/lib/grafana
       volumes:
         - name: grafana-storage
           persistentVolumeClaim:
