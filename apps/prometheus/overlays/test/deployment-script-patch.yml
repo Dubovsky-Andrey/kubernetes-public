@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: homarr
+  name: prometheus
 spec:
   template:
     spec:
       volumes:
-        - name: homarr-script
+        - name: prometheus-script
           configMap:
-            name: homarr-script
+            name: prometheus-script
             items:
               - key: start.sh
                 path: start.sh
 
       containers:
-        - name: homarr
+        - name: prometheus
           command:
             - /bin/bash
             - /opt/scripts/start.sh
           volumeMounts:
-            - name: homarr-script
+            - name: prometheus-script
               mountPath: /opt/scripts

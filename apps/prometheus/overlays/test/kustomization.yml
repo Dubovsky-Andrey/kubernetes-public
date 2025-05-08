@@ -1,0 +1,36 @@
+# kustomization.yml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: test
+
+resources:
+  - ../../base
+
+configMapGenerator:
+  - name: prometheus-config
+    envs:
+      - config.env
+patches:
+  - path: service-patch.yml
+    target:
+      group: ""
+      version: v1
+      kind: Service
+      name: prometheus
+
+  - path: pv-patch.yml
+    target:
+      group: ""
+      version: v1
+      kind: PersistentVolume
+      name: prometheus-pv
+
+  - path: deployment-script-patch.yml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: homarr
+
+generatorOptions:
+  disableNameSuffixHash: true
