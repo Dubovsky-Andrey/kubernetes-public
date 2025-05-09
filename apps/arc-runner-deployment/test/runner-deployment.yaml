@@ -13,3 +13,6 @@ spec:
       registrationToken:
         secretName: github-token
         key: token
+      env:
+        - name: ACTIONS_RUNNER_DEBUG
+          value: "true"
