@@ -1,5 +1,2 @@
 resources:
   - ../../base
-
-patchesStrategicMerge:
-  - values-patch.yaml
