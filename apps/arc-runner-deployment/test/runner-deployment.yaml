@@ -7,7 +7,7 @@ spec:
   replicas: 1
   template:
     spec:
-      repository: Dubovsky-Andrey/kubernetes-public
+      repository: Dubovsky-Andrey/test-runner
       registrationToken:
         secretName: github-token
         key: token
