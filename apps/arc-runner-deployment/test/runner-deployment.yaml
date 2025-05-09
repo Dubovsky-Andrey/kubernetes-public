@@ -10,3 +10,6 @@ spec:
       repository: Dubovsky-Andrey/kubernetes-public
       labels:
         - self-hosted
+      registrationToken:
+        secretName: github-token
+        key: token
