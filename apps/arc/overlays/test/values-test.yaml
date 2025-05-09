@@ -1,3 +1,0 @@
-actions-runner-controller:
-  metricsServer:
-    enabled: false
