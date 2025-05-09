@@ -1,5 +1,0 @@
-githubWebhookServer:
-  enabled: true
-
-authSecret:
-  create: false

@@ -1,0 +1,8 @@
+apiVersion: v2
+name: arc
+version: 0.1.0
+description: "Umbrella chart for GitHub Actions Runner Controller"
+dependencies:
+  - name: actions-runner-controller
+    version: 0.23.3
+    repository: https://actions-runner-controller.github.io/actions-runner-controller
