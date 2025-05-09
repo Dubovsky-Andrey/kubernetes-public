@@ -8,11 +8,11 @@ spec:
   template:
     spec:
       repository: Dubovsky-Andrey/kubernetes-public
-      labels:
-        - self-hosted
       registrationToken:
         secretName: github-token
         key: token
       env:
         - name: ACTIONS_RUNNER_DEBUG
           value: "true"
+      labels:
+        - self-hosted
