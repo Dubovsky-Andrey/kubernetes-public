@@ -1,7 +1,7 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: example-runner
+  name: github-runner-repo-test-runner
   namespace: test
 spec:
   replicas: 1
