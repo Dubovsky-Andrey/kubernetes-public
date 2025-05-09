@@ -15,4 +15,4 @@ spec:
         - name: ACTIONS_RUNNER_DEBUG
           value: "true"
       labels:
-        - self-hosted
+        - self-hosted-arm
