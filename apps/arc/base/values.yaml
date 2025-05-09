@@ -1,0 +1,6 @@
+githubWebhookServer:
+  enabled: true
+
+authSecret:
+  create: true
+  github_token: "PLACEHOLDER" # Заменить патчем в overlays
