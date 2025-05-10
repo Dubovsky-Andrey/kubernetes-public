@@ -4,7 +4,7 @@ metadata:
   name: github-runner-test-runner
   namespace: test
 spec:
-  replicas: 1
+  replicas: 2
   template:
     spec:
       repository: Dubovsky-Andrey/test-runner
