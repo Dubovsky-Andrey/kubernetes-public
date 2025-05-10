@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://actions-runner-controller.github.io/actions-runner-controller
     chart: actions-runner-controller
-    targetRevision: v0.23.3
+    targetRevision: v0.23.7
     helm:
       values: |
         githubWebhookServer:
