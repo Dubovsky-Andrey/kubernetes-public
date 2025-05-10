@@ -16,3 +16,5 @@ spec:
           value: "true"
       labels:
         - self-hosted-arm
+      ephemeral: true
+      ttlSecondsAfterFinished: 300
