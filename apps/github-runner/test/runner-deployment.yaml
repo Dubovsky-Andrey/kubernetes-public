@@ -7,7 +7,7 @@ spec:
   replicas: 2
   template:
     spec:
-      repository: Dubovsky-Andrey/test-runner
+      repository: Dubovsky-Andrey/k8s-update-cluster
       registrationToken:
         secretName: github-token
         key: token
