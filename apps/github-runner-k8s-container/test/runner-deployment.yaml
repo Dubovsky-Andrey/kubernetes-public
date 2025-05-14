@@ -7,7 +7,7 @@ spec:
   replicas: 1
   template:
     spec:
-      repository: Dubovsky-Andrey/k8s-container
+      repository: dubovsky-andrey/k8s-container
       registrationToken:
         secretName: github-token
         key: token
