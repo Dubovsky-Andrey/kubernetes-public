@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: github-runner
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Dubovsky-Andrey/kubernetes-public
+    path: apps/github-runner/k8s-update-container
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
