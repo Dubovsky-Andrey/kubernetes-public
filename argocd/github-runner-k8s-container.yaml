@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/Dubovsky-Andrey/kubernetes-public
+    repoURL: https://github.com/dubovsky-andrey/kubernetes-public
     path: apps/github-runner-k8s-container/test
     targetRevision: HEAD
   destination:
