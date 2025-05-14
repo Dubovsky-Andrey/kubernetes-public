@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/Dubovsky-Andrey/kubernetes-public
-    path: apps/k8s-update-container/test
+    path: apps/github-runner-k8s-update-container/test
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
