@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: github-runner
+  name: k8s-update-container
   namespace: argocd
 spec:
   project: default
