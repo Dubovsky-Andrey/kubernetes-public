@@ -1,0 +1,20 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: github-runner-k8s-update-container
+  namespace: test
+spec:
+  replicas: 1
+  template:
+    spec:
+      repository: Dubovsky-Andrey/k8s-update-container
+      registrationToken:
+        secretName: github-token
+        key: token
+      env:
+        - name: ACTIONS_RUNNER_DEBUG
+          value: "true"
+      labels:
+        - self-hosted-arm
+      ephemeral: true
+      ttlSecondsAfterFinished: 300
