@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: k8s-container
+  name: k8s-ubuntu
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/dubovsky-andrey/kubernetes-public
-    path: apps/github-runner-k8s-container/test
+    path: apps/github-runner-k8s-ubuntu/test
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
