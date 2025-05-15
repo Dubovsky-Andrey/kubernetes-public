@@ -1,13 +1,13 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: github-runner-k8s-container
+  name: github-runner-k8s-ubuntu
   namespace: test
 spec:
   replicas: 1
   template:
     spec:
-      repository: dubovsky-andrey/k8s-container
+      repository: dubovsky-andrey/k8s-ubuntu
       registrationToken:
         secretName: github-token
         key: token
