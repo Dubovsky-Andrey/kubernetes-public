@@ -4,7 +4,7 @@ metadata:
   name: github-runner-k8s-cluster
   namespace: test
 spec:
-  replicas: 5
+  replicas: 3
   template:
     spec:
       repository: dubovsky-andrey/k8s-cluster
