@@ -21,7 +21,7 @@ spec:
           value: "true"
       labels:
         - self-hosted-arm
-      ephemeral: true
+      ephemeral: false
       tolerations:
         - key: "node-role.kubernetes.io/control-plane"
           operator: "Exists"
