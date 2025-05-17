@@ -4,7 +4,7 @@ metadata:
   name: github-runner-k8s-cluster
   namespace: test
 spec:
-  replicas: 4
+  replicas: 6
   template:
     metadata:
       labels:
@@ -14,6 +14,8 @@ spec:
       registrationToken:
         secretName: github-token
         key: token
+      image: summerwind/actions-runner:latest
+      dockerdWithinRunnerContainer: true
       env:
         - name: ACTIONS_RUNNER_DEBUG
           value: "true"
@@ -22,16 +24,10 @@ spec:
       ephemeral: true
       ttlSecondsAfterFinished: 300
 
-      image: summerwind/actions-runner:latest
-      dockerdWithinRunnerContainer: true
-
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchLabels:
-                  app: github-runner-k8s-cluster
-              topologyKey: kubernetes.io/hostname
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
 
       topologySpreadConstraints:
         - maxSkew: 1
