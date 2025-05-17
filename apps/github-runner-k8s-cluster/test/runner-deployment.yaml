@@ -4,13 +4,13 @@ metadata:
   name: github-runner-k8s-cluster
   namespace: test
 spec:
-  replicas: 2
+  replicas: 4
   template:
     metadata:
       labels:
         app: github-runner-k8s-cluster
     spec:
-      repository: dubovsky-andrey/k8s-cluster
+      repository: dubovsky-and-andrey/k8s-cluster
       registrationToken:
         secretName: github-token
         key: token
@@ -21,13 +21,6 @@ spec:
         - self-hosted-arm
       ephemeral: true
       ttlSecondsAfterFinished: 300
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchLabels:
-                  app: github-runner-k8s-cluster
-              topologyKey: kubernetes.io/hostname
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
