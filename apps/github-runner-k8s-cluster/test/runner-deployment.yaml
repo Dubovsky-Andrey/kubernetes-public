@@ -10,7 +10,7 @@ spec:
       labels:
         app: github-runner-k8s-cluster
     spec:
-      repository: dubovsky-and-andrey/k8s-cluster
+      repository: dubovsky-andrey/k8s-cluster
       registrationToken:
         secretName: github-token
         key: token
@@ -21,6 +21,18 @@ spec:
         - self-hosted-arm
       ephemeral: true
       ttlSecondsAfterFinished: 300
+
+      image: summerwind/actions-runner:latest
+      dockerdWithinRunnerContainer: true
+
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: github-runner-k8s-cluster
+              topologyKey: kubernetes.io/hostname
+
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
