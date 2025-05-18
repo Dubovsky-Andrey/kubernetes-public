@@ -14,8 +14,8 @@ spec:
       registrationToken:
         secretName: github-token
         key: token
-      #     image: summerwind/actions-runner:latest
-      #    dockerdWithinRunnerContainer: true
+      dockerEnabled: true
+      dockerdWithinRunnerContainer: false
       env:
         - name: ACTIONS_RUNNER_DEBUG
           value: "true"
@@ -26,7 +26,6 @@ spec:
         - key: "node-role.kubernetes.io/worker"
           operator: "Exists"
           effect: "NoSchedule"
-
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: kubernetes.io/hostname
