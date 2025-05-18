@@ -23,7 +23,7 @@ spec:
         - self-hosted-arm
       ephemeral: false
       tolerations:
-        - key: "node-role.kubernetes.io/control-plane"
+        - key: "node-role.kubernetes.io/worker"
           operator: "Exists"
           effect: "NoSchedule"
 
