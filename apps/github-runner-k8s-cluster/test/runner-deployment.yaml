@@ -4,7 +4,7 @@ metadata:
   name: github-runner-k8s-cluster
   namespace: test
 spec:
-  replicas: 2
+  replicas: 4
   template:
     metadata:
       labels:
