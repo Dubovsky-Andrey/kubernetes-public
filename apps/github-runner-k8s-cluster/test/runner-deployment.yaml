@@ -21,7 +21,7 @@ spec:
           value: "true"
       labels:
         - self-hosted-arm
-      ephemeral: false
+      ephemeral: true
       tolerations:
         - key: "node-role.kubernetes.io/worker"
           operator: "Exists"
