@@ -14,8 +14,8 @@ spec:
       registrationToken:
         secretName: github-token
         key: token
-      image: summerwind/actions-runner:latest
-      dockerdWithinRunnerContainer: true
+      #     image: summerwind/actions-runner:latest
+      #    dockerdWithinRunnerContainer: true
       env:
         - name: ACTIONS_RUNNER_DEBUG
           value: "true"
