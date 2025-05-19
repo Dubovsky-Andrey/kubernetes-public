@@ -1,0 +1,35 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: github-runner-protodex
+  namespace: test
+spec:
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: github-runner-protodex
+    spec:
+      repository: dubovsky-andrey/protodex
+      registrationToken:
+        secretName: github-token
+        key: token
+      dockerEnabled: true
+      dockerdWithinRunnerContainer: false
+      env:
+        - name: ACTIONS_RUNNER_DEBUG
+          value: "true"
+      labels:
+        - self-hosted-arm
+      ephemeral: true
+      tolerations:
+        - key: "node-role.kubernetes.io/worker"
+          operator: "Exists"
+          effect: "NoSchedule"
+      topologySpreadConstraints:
+        - maxSkew: 2
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              app: github-runner-protodex
